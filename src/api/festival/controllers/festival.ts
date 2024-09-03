@@ -6,8 +6,6 @@ export default factories.createCoreController('api::festival.festival', ({ strap
     const { query } = ctx;
     const { filters } = query;
 
-    console.log('filters', filters);
-
     let entities;
 
     if (filters && filters.latitude && filters.longitude && filters.radius) {

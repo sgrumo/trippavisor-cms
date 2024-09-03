@@ -6,7 +6,6 @@ export default factories.createCoreService('api::festival.festival', ({ strapi }
 
     const knex = strapi.db.connection;
 
-    console.log('params', params);
     const { latitude, longitude, radius } = params;
 
     const res = await knex('festivals')
@@ -18,8 +17,6 @@ export default factories.createCoreService('api::festival.festival', ({ strapi }
         [longitude, latitude, radius]
       )
       .select("*");
-
-    console.log(res);
 
     return res;
   },
