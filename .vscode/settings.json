@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "festival"
+        "festival",
+        "devops"
     ]
 }
