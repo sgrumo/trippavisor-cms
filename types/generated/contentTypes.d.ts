@@ -405,7 +405,7 @@ export interface ApiFestivalFestival extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    thumbnail: Attribute.Media &
+    thumbnail: Attribute.Media<'images'> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -419,7 +419,7 @@ export interface ApiFestivalFestival extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    images: Attribute.Media &
+    images: Attribute.Media<'images', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -436,6 +436,13 @@ export interface ApiFestivalFestival extends Schema.CollectionType {
         };
       }>;
     seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.UID<'api::festival.festival', 'title'> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -617,6 +624,10 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
     releasedAt: Attribute.DateTime;
     scheduledAt: Attribute.DateTime;
     timezone: Attribute.String;
+    status: Attribute.Enumeration<
+      ['ready', 'blocked', 'failed', 'done', 'empty']
+    > &
+      Attribute.Required;
     actions: Attribute.Relation<
       'plugin::content-releases.release',
       'oneToMany',
@@ -671,6 +682,7 @@ export interface PluginContentReleasesReleaseAction
       'manyToOne',
       'plugin::content-releases.release'
     >;
+    isEntryValid: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
